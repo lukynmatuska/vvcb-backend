@@ -15,16 +15,32 @@ var raceSchema = new mongoose.Schema({
     },
     rules: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Rules'
+        ref: 'Rules',
     },
     categories: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category'
+        ref: 'Category',
+        required: true,
     }],
     season: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Season'
+        ref: 'Season',
+        required: true,
     },
+    startingGrid: [{
+        team: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Team',
+        },
+        paid: {
+            type: Boolean,
+            default: false,
+        },
+        result: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Result',
+        },
+    }],
 })
 
 // export
