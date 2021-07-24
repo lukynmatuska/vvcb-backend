@@ -15,13 +15,11 @@ export class TeamService {
     }
 
     async getAll() {
-        const list = await this.model.find().exec();
-        return list;
+        return await this.model.find().exec();
     }
 
     async findById(id: string) {
-        const one = await this.model.findById(id).exec();
-        return one;
+        return await this.model.findById(id).exec();
     }
 
 }
