@@ -1,10 +1,12 @@
 import { Model, Unique, ObjectID } from "@tsed/mongoose";
 import { Property, ReadOnly, Required } from "@tsed/schema";
 
-@Model()
+@Model({
+  name: 'categories'
+})
 export class CategoryModel {
   @ReadOnly()
-  @ObjectID('_id')
+  @ObjectID('id')
   _id: string;
 
   @Property()
