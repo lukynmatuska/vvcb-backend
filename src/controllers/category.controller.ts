@@ -8,10 +8,11 @@ import { CategoryModel } from "src/models/category.model";
 export class CategoryController {
   @Inject()
   categoryService: CategoryService;
+
   @ContentType('application/json')
   @Post('/')
   @Summary('Create new category')
-  @Description('Return an inserted category from database.')
+  @Description('Return an created object from database.')
   @Returns(200, CategoryModel)
   async postRoot(@BodyParams() category: CategoryModel) {
     return await this.categoryService.save(category);
@@ -20,7 +21,7 @@ export class CategoryController {
   @ContentType('application/json')
   @Get('/')
   @Summary('Get all categories')
-  @Description('Return list with all categories.')
+  @Description('Return list of all categories.')
   @Returns(200, Array).Of(CategoryModel)
   async getAll() {
     return await this.categoryService.getAll();
@@ -28,7 +29,7 @@ export class CategoryController {
 
   @ContentType('application/json')
   @Get('/:id')
-  @Summary('Get one category by ID')
+  @Summary('Get one category by id')
   @Description('Return an category with given id from database.')
   @Returns(200, CategoryModel)
   @Returns(404).Description("Not found")
