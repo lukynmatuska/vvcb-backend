@@ -5,8 +5,8 @@ import { KeycloakAuth } from "src/decorators/KeycloakAuthOptions.decorator";
 export class RestController {
 
   @Get("/protected")
-  @KeycloakAuth({role: "realm:user"})
-  protected (){
-    return {"test": "ahoj"};
+  @KeycloakAuth({ role: "realm:user" })
+  protected() {
+    return { "test": "ahoj" };
   }
 }

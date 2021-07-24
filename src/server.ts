@@ -1,5 +1,5 @@
-import {Configuration, Inject} from "@tsed/di";
-import {PlatformApplication} from "@tsed/common";
+import { Configuration, Inject } from "@tsed/di";
+import { PlatformApplication } from "@tsed/common";
 import "@tsed/platform-express"; // /!\ keep this import
 import bodyParser from "body-parser";
 import compress from "compression";
@@ -8,8 +8,7 @@ import methodOverride from "method-override";
 import cors from "cors";
 import "@tsed/ajv";
 import "@tsed/swagger";
-import {config, rootDir} from "./config";
-import {IndexCtrl} from "./controllers/pages/Index.controller";
+import { config, rootDir } from "./config";
 import { KeycloakService } from "./services/Keycloak.service";
 import session from "express-session";
 import "@tsed/socketio";
@@ -20,10 +19,9 @@ import "@tsed/socketio";
   httpPort: process.env.PORT || 8083,
   httpsPort: false, // CHANGE
   mount: {
-    "/rest": [
+    "/": [
       `${rootDir}/controllers/**/*.ts`
-    ],
-    "/": [IndexCtrl]
+    ]
   },
   swagger: [
     {
@@ -39,7 +37,7 @@ import "@tsed/socketio";
                   authorizationUrl: "https://id.matejbucek.cz/auth/realms/SvelteSSO/protocol/openid-connect/auth",
                   tokenUrl: "https://id.matejbucek.cz/auth/realms/SvelteSSO/protocol/openid-connect/token",
                   refreshUrl: "https://id.matejbucek.cz/auth/realms/SvelteSSO/protocol/openid-connect/token",
-                  scopes: {openid: "openid", profile: "profile"}
+                  scopes: { openid: "openid", profile: "profile" }
                 }
               }
             }
@@ -57,7 +55,14 @@ import "@tsed/socketio";
   ],
   socketIO: {
     path: "/ws"
-  }
+  },
+  mongoose: [{
+    id: 'default',
+    //@ts-ignore
+    url: process.env.MONGO_URL,
+    //@ts-ignore
+    connectionOptions: process.env.MONGO_OPTIONS || '',
+  }]
 })
 export class Server {
   @Inject()
