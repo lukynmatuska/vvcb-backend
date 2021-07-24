@@ -1,6 +1,5 @@
 import { Inject, Injectable } from "@tsed/di";
 import { MongooseModel } from "@tsed/mongoose";
-import { CategoryModel } from "src/models/category.model";
 import { SeasonModel } from "src/models/season.model";
 
 @Injectable()
