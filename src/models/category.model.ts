@@ -1,5 +1,5 @@
 import { Model, Unique, ObjectID } from "@tsed/mongoose";
-import { Property, ReadOnly, Required } from "@tsed/schema";
+import { CollectionOf, Property, ReadOnly, Required } from "@tsed/schema";
 
 @Model({
   name: 'categories'
@@ -13,4 +13,9 @@ export class CategoryModel {
   @Required()
   @Unique()
   name: string;
+
+  @Property()
+  @Required()
+  @CollectionOf(Number)
+  points: Number[];
 }
