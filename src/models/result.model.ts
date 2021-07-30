@@ -2,6 +2,7 @@ import { Model, ObjectID, Ref } from "@tsed/mongoose";
 import { Default, Format, Property, ReadOnly, Required } from "@tsed/schema";
 import { RaceModel } from "./race.model";
 import { TeamModel } from "./team.model";
+import { Time } from "./time.class";
 
 @Model({
   name: "results"
@@ -13,11 +14,7 @@ export class ResultModel {
 
   @Property()
   @Required()
-  time: {
-    final: Number,
-    left: Number,
-    right: Number,
-  }
+  time: Time;
 
   @Property()
   @Required()
