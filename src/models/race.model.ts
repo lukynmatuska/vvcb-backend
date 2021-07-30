@@ -1,7 +1,7 @@
 import { Model, ObjectID, Ref } from "@tsed/mongoose";
-import { Property, ReadOnly, Required } from "@tsed/schema";
-import { CategoryModel } from "./category.model";
-import { RulesModel } from "./rules.model";
+import { CollectionOf, Property, ReadOnly, Required } from "@tsed/schema";
+import { RaceCategory } from "./raceCategory.model";
+import { Reservation } from "./reservation.class";
 import { SeasonModel } from "./season.model";
 
 @Model({
@@ -23,9 +23,11 @@ export class RaceModel {
 
   @Property()
   @Required()
-  categories: [{
-    category: Ref<CategoryModel>,
-    rules: Ref<RulesModel>
-  }]
+  @CollectionOf(RaceCategory)
+  categories: RaceCategory[];
+
+  @Property()
+  @CollectionOf(Reservation)
+  reservations: Reservation[];
 
 }
