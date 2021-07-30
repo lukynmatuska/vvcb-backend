@@ -8,7 +8,7 @@ export class CategoryService {
 
     }
 
-    async save(obj: CategoryModel): Promise<MongooseModel<CategoryModel>> {
+    async save(obj: CategoryModel){
         const doc = new this.model(obj);
         await doc.save();
         return doc;

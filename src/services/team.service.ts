@@ -8,7 +8,7 @@ export class TeamService {
 
     }
 
-    async save(obj: TeamModel): Promise<MongooseModel<TeamModel>> {
+    async save(obj: TeamModel) {
         const doc = new this.model(obj);
         await doc.save();
         return doc;

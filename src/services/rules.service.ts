@@ -8,7 +8,7 @@ export class RulesService {
 
     }
 
-    async save(obj: RulesModel): Promise<MongooseModel<RulesModel>> {
+    async save(obj: RulesModel) {
         const doc = new this.model(obj);
         await doc.save();
         return doc;

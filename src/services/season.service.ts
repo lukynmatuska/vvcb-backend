@@ -8,7 +8,7 @@ export class SeasonService {
 
     }
 
-    async save(obj: SeasonModel): Promise<MongooseModel<SeasonModel>> {
+    async save(obj: SeasonModel) {
         const doc = new this.model(obj);
         await doc.save();
         return doc;

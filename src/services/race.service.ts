@@ -8,7 +8,7 @@ export class RaceService {
 
     }
 
-    async save(obj: RaceModel): Promise<MongooseModel<RaceModel>> {
+    async save(obj: RaceModel) {
         const doc = new this.model(obj);
         await doc.save();
         return doc;

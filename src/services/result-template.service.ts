@@ -8,7 +8,7 @@ export class ResultTemplateService {
 
     }
 
-    async save(obj: ResultTemplateModel): Promise<MongooseModel<ResultTemplateModel>> {
+    async save(obj: ResultTemplateModel) {
         const doc = new this.model(obj);
         await doc.save()
         return doc;
