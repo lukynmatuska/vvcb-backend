@@ -2,16 +2,16 @@ import { Configuration, Inject } from "@tsed/di";
 import { PlatformApplication } from "@tsed/common";
 import "@tsed/platform-express"; // /!\ keep this import
 import bodyParser from "body-parser";
-import compress from "compression";
-import cookieParser from "cookie-parser";
 import methodOverride from "method-override";
 import cors from "cors";
 import "@tsed/ajv";
 import "@tsed/swagger";
 import { config, rootDir } from "./config";
 import { KeycloakService } from "./services/Keycloak.service";
-import session from "express-session";
 import "@tsed/socketio";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import compression from "compression";
 
 @Configuration({
   ...config,
@@ -20,9 +20,14 @@ import "@tsed/socketio";
   httpsPort: false, // CHANGE
   mount: {
     "/": [
-      `${rootDir}/controllers/**/*.ts`
+      `${rootDir}/controllers/**/*.ts`,
+      `${rootDir}/controllers/**/*.js`
     ]
   },
+  componentsScan: [
+    `${rootDir}/services/**/*.ts`,
+    `${rootDir}/services/**/*.js`
+  ],
   swagger: [
     {
       path: "/v3/docs",
@@ -78,7 +83,7 @@ export class Server {
     this.app
       .use(cors())
       .use(cookieParser())
-      .use(compress({}))
+      .use(compression({}))
       .use(methodOverride())
       .use(bodyParser.json())
       .use(bodyParser.urlencoded({
@@ -95,3 +100,5 @@ export class Server {
       .use(this.keycloakService.getKeycloakInstance().middleware());
   }
 }
+
+
