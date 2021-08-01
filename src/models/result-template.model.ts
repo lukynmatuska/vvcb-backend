@@ -1,6 +1,6 @@
 import { Model, ObjectID } from "@tsed/mongoose";
 import { Default, Format, Property, ReadOnly, Required } from "@tsed/schema";
-import { Time } from "./time.class";
+import { TimeTemplate } from "./time.class";
 
 @Model({
   name: "resultTemplates"
@@ -12,7 +12,7 @@ export class ResultTemplateModel {
 
   @Property()
   @Required()
-  time: Time;
+  time: TimeTemplate;
 
   @Property()
   @Format("date-time")

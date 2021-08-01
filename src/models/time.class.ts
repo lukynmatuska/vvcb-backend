@@ -17,3 +17,16 @@ export class Time {
     @Required()
     final: Number;
 }
+
+export class TimeTemplate {
+    @Property()
+    @Required()
+    left: Number;
+
+    @Property()
+    @Required()
+    right: Number;
+
+    @Property()
+    final: Number;
+}
