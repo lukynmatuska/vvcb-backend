@@ -19,3 +19,10 @@ $ npm run start
 $ npm run build
 $ npm run start:prod
 ```
+
+## Docker compose
+- Copy `docker-compose.sample.yml` to `docker-compose.yml`
+- Edit ENV variables in `docker-compose.yml`
+- Copy `mongo-init.sample.js` to `mongo-init.js`
+- Edit database credentials in `mongo-init.js`
+- Start containers with ```docker-compose up -d```
