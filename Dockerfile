@@ -14,21 +14,28 @@
 ##                                                                           ##
 ###############################################################################
 ###############################################################################
-FROM node:14-alpine
+FROM node:16-alpine
 
-RUN apk update && apk add build-base git python
+RUN apk update && apk add build-base git python3
 
-COPY package.json .
-COPY yarn.lock .
-COPY ./src ./src
-COPY ./dist ./dist
-COPY ./resources ./resources
-COPY ./spec ./spec
+# COPY package.json .
+# COPY package-lock.json .
+# COPY ./src ./src
+# COPY ./dist ./dist
+# COPY ./resources ./resources
+# COPY ./spec ./spec
+COPY . .
 
-RUN yarn install --production
+RUN npm install -g npm
+# RUN npm install typescript
+#tsconfig-paths
+RUN npm install
+RUN npm run build
 
 EXPOSE 8081
 ENV PORT 8081
 ENV NODE_ENV production
 
-CMD ["yarn", "start:prod"]
+# CMD ["npm", "run start:prod"]
+
+CMD npm run start:prod
