@@ -21,8 +21,20 @@ $ npm run start:prod
 ```
 
 ## Docker compose
-- Copy `docker-compose.sample.yml` to `docker-compose.yml`
-- Edit ENV variables in `docker-compose.yml`
-- Copy `mongo-init.sample.js` to `mongo-init.js`
-- Edit database credentials in `mongo-init.js`
-- Start containers with ```docker-compose up -d```
+
+```batch
+# Copy docker compose file
+cp docker-compose.sample.yml docker-compose.yml
+
+# Edit docker-compose.yml
+vim docker-compose.yml
+
+# Copy mongo init file
+cp mongo-init.sample.js mongo-init.js
+
+# Edit database credentials
+vim mongo-init.js
+
+# Start containers
+docker-compose up -d
+```
