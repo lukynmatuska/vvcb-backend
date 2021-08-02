@@ -64,10 +64,18 @@ import compression from "compression";
   mongoose: [{
     id: 'default',
     //@ts-ignore
-    url: process.env.MONGO_URL,
+    url: process.env.MONGO_URL || "mongodb://vvcb:vvcb@localhost:27017/vvcb",
     //@ts-ignore
     connectionOptions: process.env.MONGO_OPTIONS || '',
-  }]
+  }],
+    keycloak: {
+    realm: process.env.KEYCLOAK_REALM || "vvcb",
+    bearerOnly: process.env.KEYCLOAK_BEARER_ONLY || true,
+    authServerUrl: process.env.KEYCLOAK_URL || "https://auth.vvcb.cz/auth/",
+    sslRequired: process.env.KEYCLOAK_SSL_REQUIRED || "external",
+    resource: process.env.KEYCLOAK_CLIENT_ID || "backend",
+    confidentialPort: process.env.KEYCLOAK_CONF_PORT || 0
+  }
 })
 export class Server {
   @Inject()
