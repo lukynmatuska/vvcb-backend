@@ -22,4 +22,7 @@ export class ResultTemplateService {
         return await this.model.findById(id).exec();
     }
 
+    async deleteById(id: string) {
+        return await this.model.deleteOne({ id }).exec();
+    }
 }

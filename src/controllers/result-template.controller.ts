@@ -1,4 +1,4 @@
-import { BodyParams, Controller, Get, Inject, PathParams, Post } from "@tsed/common";
+import { BodyParams, Controller, Delete, Get, Inject, PathParams, Post } from "@tsed/common";
 import { ContentType, Description, Returns, Summary } from "@tsed/schema";
 import { ResultTemplateModel } from "src/models/result-template.model";
 import { ResultTemplateService } from "src/services/result-template.service";
@@ -34,6 +34,16 @@ export class ResultTemplateController {
   @Returns(200, ResultTemplateModel)
   @Returns(404).Description("Not found")
   async getById(@PathParams("id") id: string) {
+    return await this.resultTemplateService.findById(id);
+  }
+
+  @ContentType("application/json")
+  @Delete("/:id")
+  @Summary("Delete one result template by ID")
+  @Description("Return an result template with given id deleted from database.")
+  @Returns(200, ResultTemplateModel)
+  @Returns(404).Description("Not found")
+  async deleteById(@PathParams("id") id: string) {
     return await this.resultTemplateService.findById(id);
   }
 }
