@@ -59,7 +59,9 @@ import compression from "compression";
     "**/*.spec.ts"
   ],
   socketIO: {
-    path: "/ws"
+    cors:{
+      origin: "*"
+    }
   },
   mongoose: [{
     id: 'default',
