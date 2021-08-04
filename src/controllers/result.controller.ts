@@ -1,4 +1,4 @@
-import { BodyParams, Controller, Get, Inject, PathParams, Post } from "@tsed/common";
+import { BodyParams, Controller, Get, Inject, Patch, PathParams, Post } from "@tsed/common";
 import { ContentType, Description, Returns, Summary } from "@tsed/schema";
 import { ResultModel } from "src/models/result.model";
 import { ResultService } from "src/services/result.service";
@@ -34,5 +34,15 @@ export class ResultController {
   @Returns(404).Description("Not found")
   async getById(@PathParams("id") id: string) {
     return await this.resultService.findById(id);
+  }
+
+  @ContentType("application/json")
+  @Patch("/media/youtube")
+  @Summary("Patch YouTube video link to result by ID")
+  @Description("Return updated result with given id from database.")
+  @Returns(200, ResultModel)
+  @Returns(404).Description("Not found")
+  async patchYouTubeLink(@BodyParams("id") id: string, @BodyParams("link") link: string) {
+    return await this.resultService.patchYouTubeLink(id, link);
   }
 }
