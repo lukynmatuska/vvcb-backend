@@ -44,6 +44,6 @@ export class ResultTemplateController {
   @Returns(200, ResultTemplateModel)
   @Returns(404).Description("Not found")
   async deleteById(@PathParams("id") id: string) {
-    return await this.resultTemplateService.findById(id);
+    return await this.resultTemplateService.deleteById(id);
   }
 }

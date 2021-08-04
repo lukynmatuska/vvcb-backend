@@ -23,6 +23,6 @@ export class ResultTemplateService {
     }
 
     async deleteById(id: string) {
-        return await this.model.deleteOne({ id }).exec();
+        return await this.model.deleteOne({ _id: id }).exec();
     }
 }
