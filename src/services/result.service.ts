@@ -15,11 +15,19 @@ export class ResultService {
     }
 
     async getAll() {
-        return await this.model.find().exec();
+        return await this.model
+            .find()
+            .populate('team')
+            .populate('race')
+            .exec();
     }
 
     async findById(id: string) {
-        return await this.model.findById(id).exec();
+        return await this.model
+            .findById(id)
+            .populate('team')
+            .populate('race')
+            .exec();
     }
 
 }
