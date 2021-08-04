@@ -30,4 +30,11 @@ export class ResultService {
             .exec();
     }
 
+    async patchYouTubeLink(id: string, link: string) {
+        return await this.model
+            .findByIdAndUpdate(id, { media: { youtube: link } })
+            .populate('team')
+            .populate('race')
+            .exec();
+    }
 }
