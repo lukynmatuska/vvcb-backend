@@ -15,11 +15,19 @@ export class TeamService {
     }
 
     async getAll() {
-        return await this.model.find().exec();
+        return await this.model
+            .find()
+            .populate("category")
+            .populate("district")
+            .exec();
     }
 
     async findById(id: string) {
-        return await this.model.findById(id).exec();
+        return await this.model
+            .findById(id)
+            .populate("category")
+            .populate("district")
+            .exec();
     }
 
 }

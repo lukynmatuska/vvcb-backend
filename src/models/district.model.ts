@@ -1,0 +1,19 @@
+import { Model, ObjectID } from "@tsed/mongoose";
+import { Property, ReadOnly, Required } from "@tsed/schema";
+
+@Model({
+  name: "districts"
+})
+export class DistrictModel {
+  @ReadOnly()
+  @ObjectID("id")
+  _id: string;
+
+  @Property()
+  @Required()
+  name: string;
+
+  @Property()
+  @Required()
+  short: string;
+}
