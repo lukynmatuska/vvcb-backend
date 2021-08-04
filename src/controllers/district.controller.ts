@@ -21,7 +21,7 @@ export class DistrictController {
   @Get("/")
   @Summary("Get all districts")
   @Description("Returns list of all districts")
-  @Returns(200, Array).of(DistrictModel)
+  @Returns(200, Array).Of(DistrictModel)
   async getAll() {
     return await this.districtService.getAll();
   }
