@@ -23,7 +23,11 @@ export class ResultService {
     }
 
     async findById(id: string) {
-        return await this.model.findById(id).exec();
+        return await this.model
+            .findById(id)
+            .populate('team')
+            .populate('race')
+            .exec();
     }
 
 }
