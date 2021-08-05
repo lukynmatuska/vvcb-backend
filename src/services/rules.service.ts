@@ -27,4 +27,9 @@ export class RulesService {
         return await this.model.findById(id).exec();
     }
 
+    async deleteById(id: string) {
+        const rules = await this.model.findOneAndDelete({ _id: id });
+        this.webSocketService.broadcast("delete-rules", rules);
+        return rules;
+    }
 }

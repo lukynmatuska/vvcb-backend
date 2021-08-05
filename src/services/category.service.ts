@@ -27,4 +27,9 @@ export class CategoryService {
         return await this.model.findById(id).exec();
     }
 
+    async deleteById(id: string) {
+        const category = await this.model.findOneAndDelete({ _id: id });
+        this.webSocketService.broadcast("delete-category", category);
+        return category;
+    }
 }

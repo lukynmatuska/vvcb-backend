@@ -39,4 +39,13 @@ export class TeamService {
             .exec();
     }
 
+    async deleteById(id: string) {
+        const team = await this.model
+            .deleteOne({ _id: id })
+            .populate("category")
+            .populate("district")
+            .exec();
+        this.webSocketService.broadcast("delete-team", team);
+        return team;
+    }
 }

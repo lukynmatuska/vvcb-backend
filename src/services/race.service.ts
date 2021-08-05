@@ -35,4 +35,13 @@ export class RaceService {
             .populate("season")
             .exec();
     }
+
+    async deleteById(id: string) {
+        const race = await this.model
+            .findOneAndDelete({ _id: id })
+            .populate("season")
+            .exec();
+        this.webSocketService.broadcast("delete-race", race);
+        return race;
+    }
 }

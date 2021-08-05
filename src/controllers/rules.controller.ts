@@ -1,5 +1,5 @@
 import { Inject } from "@tsed/di";
-import { BodyParams, Controller, Get, PathParams, Post } from "@tsed/common";
+import { BodyParams, Controller, Delete, Get, PathParams, Post } from "@tsed/common";
 import { RulesService } from "src/services/rules.service";
 import { ContentType, Description, Returns, Summary } from "@tsed/schema";
 import { RulesModel } from "src/models/rules.model";
@@ -35,5 +35,15 @@ export class RulesController {
   @Returns(404).Description('Not found')
   async getRulesById(@PathParams('id') id: string) {
     return await this.rulesService.findById(id);
+  }
+
+  @ContentType("application/json")
+  @Delete("/:id")
+  @Summary("Delete one rules with given ID")
+  @Description("Returns deleted rules with given id from database.")
+  @Returns(200, RulesModel)
+  @Returns(404).Description("Not found")
+  async deleteById(@PathParams("id") id: string) {
+    return await this.rulesService.deleteById(id);
   }
 }

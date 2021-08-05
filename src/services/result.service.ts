@@ -48,4 +48,14 @@ export class ResultService {
         this.webSocketService.broadcast("update-result", result);
         return result;
     }
+
+    async deleteById(id: string) {
+        const result = await this.model
+            .findOneAndDelete({ _id: id })
+            .populate("team")
+            .populate("race")
+            .exec();
+        this.webSocketService.broadcast("delete-result", result);
+        return result;
+    }
 }

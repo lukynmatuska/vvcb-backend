@@ -7,7 +7,7 @@ import { WebSocketService } from "./web-socket.service";
 export class ResultTemplateService {
     constructor(
         @Inject(ResultTemplateModel) private model: MongooseModel<ResultTemplateModel>,
-        @Inject(WebSocketService) private wss: WebSocketService
+        @Inject(WebSocketService) private webSocketService: WebSocketService
     ) {
 
     }
@@ -15,7 +15,7 @@ export class ResultTemplateService {
     async save(obj: ResultTemplateModel) {
         const doc = new this.model(obj);
         await doc.save()
-        this.wss.broadcast("new-result-template", doc);
+        this.webSocketService.broadcast("new-result-template", doc);
         return doc;
     }
 
@@ -28,8 +28,8 @@ export class ResultTemplateService {
     }
 
     async deleteById(id: string) {
-        const doc = await this.model.deleteOne({ _id: id }).exec();
-        this.wss.broadcast("delete-result-template", doc);
-        return doc;
+        const resultTemplate = await this.model.deleteOne({ _id: id }).exec();
+        this.webSocketService.broadcast("delete-result-template", resultTemplate);
+        return resultTemplate;
     }
 }

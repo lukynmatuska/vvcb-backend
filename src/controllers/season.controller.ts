@@ -1,6 +1,6 @@
 import { Inject } from "@tsed/di";
-import { BodyParams, Controller, Get, PathParams, Post } from "@tsed/common";
-import { ContentType, Description, Returns, Summary } from "@tsed/schema";
+import { BodyParams, Controller, Delete, Get, PathParams, Post } from "@tsed/common";
+import { ContentType, Description, Path, Returns, Summary } from "@tsed/schema";
 import { SeasonModel } from "src/models/season.model";
 import { SeasonService } from "src/services/season.service";
 
@@ -32,8 +32,18 @@ export class SeasonController {
   @Summary('Get one season by id')
   @Description('Return a season with given id from database.')
   @Returns(200, SeasonModel)
-  @Returns(400).Description('Not found')
+  @Returns(404).Description('Not found')
   async getSeasonById(@PathParams('id') id: string) {
     return await this.seasonService.findById(id);
+  }
+
+  @ContentType("application/json")
+  @Delete("/:id")
+  @Summary("Delete one season by id")
+  @Description("Returns deleted season with given id from database.")
+  @Returns(200, SeasonModel)
+  @Returns(404).Description("Not found")
+  async deleteById(@PathParams("id") id: string) {
+    return await this.seasonService.deleteById(id);
   }
 }

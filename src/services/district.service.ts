@@ -27,4 +27,9 @@ export class DistrictService {
         return await this.model.findById(id);
     }
 
+    async deleteById(id: string) {
+        const district = await this.model.findOneAndDelete({ _id: id });
+        this.webSocketService.broadcast("delete-district", district);
+        return district;
+    }
 }

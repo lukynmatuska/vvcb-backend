@@ -1,5 +1,5 @@
 import { Inject } from "@tsed/di";
-import { BodyParams, Controller, Get, PathParams, Post } from "@tsed/common";
+import { BodyParams, Controller, Delete, Get, PathParams, Post } from "@tsed/common";
 import { ContentType, Description, Returns, Summary } from "@tsed/schema";
 import { TeamModel } from "src/models/team.model";
 import { TeamService } from "src/services/team.service";
@@ -34,5 +34,15 @@ export class TeamController {
   @Returns(404).Description("Not found")
   async getRoot(@PathParams('id') id: string) {
     return await this.teamService.findById(id);
+  }
+
+  @ContentType("application/json")
+  @Delete("/:id")
+  @Summary("Delete one team by ID")
+  @Description("Returns deleted team with given id from database.")
+  @Returns(200, TeamModel)
+  @Returns(404).Description("Not found")
+  async deleteById(@PathParams("id") id: string) {
+    return await this.teamService.deleteById(id);
   }
 }

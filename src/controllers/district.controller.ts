@@ -1,4 +1,4 @@
-import { BodyParams, Controller, Get, Inject, PathParams, Post } from "@tsed/common";
+import { BodyParams, Controller, Delete, Get, Inject, PathParams, Post } from "@tsed/common";
 import { ContentType, Description, Returns, Summary } from "@tsed/schema";
 import { DistrictModel } from "src/models/district.model";
 import { DistrictService } from "src/services/district.service";
@@ -34,5 +34,15 @@ export class DistrictController {
   @Returns(404).Description("Not found")
   async findById(@PathParams("id") id: string) {
     return await this.districtService.findById(id);
+  }
+
+  @ContentType("application/json")
+  @Delete("/:id")
+  @Summary("Delete district by ID")
+  @Description("Returns deleted district with given id from database.")
+  @Returns(200, DistrictModel)
+  @Returns(404).Description("Not found")
+  async deleteById(@PathParams("id") id: string) {
+    return await this.districtService.deleteById(id);
   }
 }

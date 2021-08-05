@@ -26,4 +26,10 @@ export class SeasonService {
     async findById(id: string) {
         return await this.model.findById(id).exec();
     }
+
+    async deleteById(id: string) {
+        const season = await this.model.findOneAndDelete({ _id: id });
+        this.webSocketService.broadcast("delete-season", season);
+        return season;
+    }
 }
