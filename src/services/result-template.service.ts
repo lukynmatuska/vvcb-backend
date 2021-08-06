@@ -28,7 +28,8 @@ export class ResultTemplateService {
     }
 
     async deleteById(id: string) {
-        const resultTemplate = await this.model.deleteOne({ _id: id }).exec();
+        const resultTemplate = await this.findById(id);
+        await this.model.deleteOne({ _id: id }).exec();
         this.webSocketService.broadcast("delete-result-template", resultTemplate);
         return resultTemplate;
     }
