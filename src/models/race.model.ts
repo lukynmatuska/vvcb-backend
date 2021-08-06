@@ -18,6 +18,10 @@ export class RaceModel {
 
   @Property()
   @Required()
+  date: Date;
+
+  @Property()
+  @Required()
   @Ref(SeasonModel)
   season: Ref<SeasonModel>
 
