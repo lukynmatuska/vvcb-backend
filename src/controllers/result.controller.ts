@@ -32,12 +32,10 @@ export class ResultController {
   @Description("Return list of all results.")
   @Returns(200, Array).Of(ResultModel)
   async getFilted(
-    @QueryParams("race") race: string,
-    @QueryParams("team") team: string
+    @QueryParams("raceId") raceId: string
   ) {
     return await this.resultService.getFiltred({
-      race: race,
-      team: team
+      race: raceId,
     });
   }
 
