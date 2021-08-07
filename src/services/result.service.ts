@@ -58,4 +58,12 @@ export class ResultService {
         this.webSocketService.broadcast("delete-result", result);
         return result;
     }
+
+    async getFiltred(filter: any) {
+        return await this.model
+            .find(filter)
+            .populate("team")
+            .populate("race")
+            .exec()
+    }
 }

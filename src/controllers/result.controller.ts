@@ -1,4 +1,4 @@
-import { BodyParams, Controller, Delete, Get, Inject, Patch, PathParams, Post } from "@tsed/common";
+import { BodyParams, Controller, Delete, Get, Inject, Patch, PathParams, Post, QueryParams } from "@tsed/common";
 import { ContentType, Description, Returns, Summary } from "@tsed/schema";
 import { ResultModel } from "src/models/result.model";
 import { ResultService } from "src/services/result.service";
@@ -24,6 +24,21 @@ export class ResultController {
   @Returns(200, Array).Of(ResultModel)
   async getAll() {
     return await this.resultService.getAll();
+  }
+
+  @ContentType("application/json")
+  @Get("/filtred")
+  @Summary("Get all results")
+  @Description("Return list of all results.")
+  @Returns(200, Array).Of(ResultModel)
+  async getFilted(
+    @QueryParams("race") race: string,
+    @QueryParams("team") team: string
+  ) {
+    return await this.resultService.getFiltred({
+      race: race,
+      team: team
+    });
   }
 
   @ContentType("application/json")
