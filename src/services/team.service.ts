@@ -26,6 +26,7 @@ export class TeamService {
     async getAll() {
         return await this.model
             .find()
+            .sort('name')
             .populate("category")
             .populate("district")
             .exec();

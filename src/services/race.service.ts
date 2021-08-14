@@ -29,6 +29,7 @@ export class RaceService {
     async getAll() {
         return await this.model
             .find()
+            .sort('date')
             .populate("season")
             .populate("categories.category")
             .populate("categories.rules")

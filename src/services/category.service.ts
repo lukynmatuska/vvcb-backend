@@ -20,7 +20,7 @@ export class CategoryService {
     }
 
     async getAll() {
-        return await this.model.find().exec();
+        return await this.model.find().sort('name').exec();
     }
 
     async findById(id: string) {
