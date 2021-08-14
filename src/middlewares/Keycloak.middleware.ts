@@ -23,7 +23,7 @@ export class KeycloakMiddleware implements IMiddleware {
           return keycloak.protect((accessToken: Token, req: Request, res: Response) => {
             //@ts-ignore
             for(let role of options.anyRole){
-              if(accessToken.hasRealmRole(role))
+              if(accessToken.hasRole(role))
                 return true;
             }
             return false;
