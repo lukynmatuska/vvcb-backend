@@ -3,6 +3,7 @@ import { BodyParams, Controller, Delete, Get, PathParams, Post } from "@tsed/com
 import { ContentType, Description, Returns, Summary } from "@tsed/schema";
 import { CategoryService } from "src/services/category.service";
 import { CategoryModel } from "src/models/category.model";
+import { KeycloakAuth } from "src/decorators/KeycloakAuthOptions.decorator";
 
 @Controller('/category')
 export class CategoryController {
@@ -14,6 +15,7 @@ export class CategoryController {
   @Summary('Create new category')
   @Description('Return an created object from database.')
   @Returns(200, CategoryModel)
+  @KeycloakAuth({role: "realm:admin"})
   async postRoot(@BodyParams() category: CategoryModel) {
     return await this.categoryService.save(category);
   }
@@ -43,6 +45,7 @@ export class CategoryController {
   @Description("Returns an category deleted from database.")
   @Returns(200, CategoryModel)
   @Returns(404).Description("Not found")
+  @KeycloakAuth({role: "realm:admin"})
   async deleteById(@PathParams("id") id: string) {
     return await this.categoryService.deleteById(id);
   }

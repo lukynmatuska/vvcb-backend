@@ -3,6 +3,7 @@ import { BodyParams, Controller, Delete, Get, PathParams, Post } from "@tsed/com
 import { RaceService } from "src/services/race.service";
 import { ContentType, Description, Returns, Summary } from "@tsed/schema";
 import { RaceModel } from "src/models/race.model";
+import { KeycloakAuth } from "src/decorators/KeycloakAuthOptions.decorator";
 
 @Controller("/race")
 export class RaceController {
@@ -14,6 +15,7 @@ export class RaceController {
   @Summary('Create new race')
   @Description('Return an created object from database.')
   @Returns(200, RaceModel)
+  @KeycloakAuth({role: "realm:admin"})
   async createRace(@BodyParams() race: RaceModel) {
     return await this.raceService.save(race);
   }
@@ -43,6 +45,7 @@ export class RaceController {
   @Description("Return deleted race with given id from database.")
   @Returns(200, RaceModel)
   @Returns(404).Description("Not found")
+  @KeycloakAuth({role: "realm:admin"})
   async deleteById(@PathParams("id") id: string) {
     return await this.raceService.deleteById(id);
   }

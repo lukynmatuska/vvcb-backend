@@ -6,6 +6,7 @@ import {KeycloakMiddleware} from '../middlewares/Keycloak.middleware';
 
 export interface KeycloakAuthOptions extends IAuthOptions {
     role?: string;
+    anyRole?: string[];
     scopes?: string[];
 }
 

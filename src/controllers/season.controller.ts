@@ -3,6 +3,7 @@ import { BodyParams, Controller, Delete, Get, PathParams, Post } from "@tsed/com
 import { ContentType, Description, Path, Returns, Summary } from "@tsed/schema";
 import { SeasonModel } from "src/models/season.model";
 import { SeasonService } from "src/services/season.service";
+import { KeycloakAuth } from "src/decorators/KeycloakAuthOptions.decorator";
 
 @Controller("/season")
 export class SeasonController {
@@ -14,6 +15,7 @@ export class SeasonController {
   @Summary('Create new season')
   @Description('Return an created object from database')
   @Returns(200, SeasonModel)
+  @KeycloakAuth({role: "realm:admin"})
   async createSeason(@BodyParams() season: SeasonModel) {
     return await this.seasonService.save(season);
   }
@@ -43,6 +45,7 @@ export class SeasonController {
   @Description("Returns deleted season with given id from database.")
   @Returns(200, SeasonModel)
   @Returns(404).Description("Not found")
+  @KeycloakAuth({role: "realm:admin"})
   async deleteById(@PathParams("id") id: string) {
     return await this.seasonService.deleteById(id);
   }

@@ -3,6 +3,7 @@ import { BodyParams, Controller, Delete, Get, PathParams, Post } from "@tsed/com
 import { RulesService } from "src/services/rules.service";
 import { ContentType, Description, Returns, Summary } from "@tsed/schema";
 import { RulesModel } from "src/models/rules.model";
+import { KeycloakAuth } from "src/decorators/KeycloakAuthOptions.decorator";
 
 @Controller("/rules")
 export class RulesController {
@@ -14,6 +15,7 @@ export class RulesController {
   @Summary('Create new rules')
   @Description('Return an created object from database.')
   @Returns(200, RulesModel)
+  @KeycloakAuth({role: "realm:admin"})
   async createNewRules(@BodyParams() rules: RulesModel) {
     return await this.rulesService.save(rules);
   }
@@ -43,6 +45,7 @@ export class RulesController {
   @Description("Returns deleted rules with given id from database.")
   @Returns(200, RulesModel)
   @Returns(404).Description("Not found")
+  @KeycloakAuth({role: "realm:admin"})
   async deleteById(@PathParams("id") id: string) {
     return await this.rulesService.deleteById(id);
   }

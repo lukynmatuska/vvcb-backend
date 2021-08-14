@@ -1,5 +1,6 @@
 import { BodyParams, Controller, Delete, Get, Inject, PathParams, Post } from "@tsed/common";
 import { ContentType, Description, Returns, Summary } from "@tsed/schema";
+import { KeycloakAuth } from "src/decorators/KeycloakAuthOptions.decorator";
 import { ResultTemplateModel } from "src/models/result-template.model";
 import { ResultTemplateService } from "src/services/result-template.service";
 
@@ -13,6 +14,7 @@ export class ResultTemplateController {
   @Summary("Create new result template")
   @Description("Return an inserted object from database.")
   @Returns(200, ResultTemplateModel)
+  @KeycloakAuth({anyRole: ["realm:admin", "realm:result-filler"]})
   async postRoot(@BodyParams() resultTemplate: ResultTemplateModel) {
     console.log(resultTemplate);
     return await this.resultTemplateService.save(resultTemplate);
@@ -43,6 +45,7 @@ export class ResultTemplateController {
   @Description("Return an result template with given id deleted from database.")
   @Returns(200, ResultTemplateModel)
   @Returns(404).Description("Not found")
+  @KeycloakAuth({anyRole: ["realm:admin", "realm:result-filler"]})
   async deleteById(@PathParams("id") id: string) {
     return await this.resultTemplateService.deleteById(id);
   }

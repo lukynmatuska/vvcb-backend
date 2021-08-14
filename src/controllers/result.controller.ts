@@ -1,5 +1,6 @@
 import { BodyParams, Controller, Delete, Get, Inject, Patch, PathParams, Post, QueryParams } from "@tsed/common";
 import { ContentType, Description, Returns, Summary } from "@tsed/schema";
+import { KeycloakAuth } from "src/decorators/KeycloakAuthOptions.decorator";
 import { ResultModel } from "src/models/result.model";
 import { ResultService } from "src/services/result.service";
 
@@ -13,6 +14,7 @@ export class ResultController {
   @Summary("Create new result")
   @Description("Return an inserted object from database.")
   @Returns(200, ResultModel)
+  @KeycloakAuth({anyRole: ["realm:admin", "realm:result-filler"]})
   async postRoot(@BodyParams() result: ResultModel) {
     return await this.resultService.save(result);
   }
@@ -55,6 +57,7 @@ export class ResultController {
   @Description("Return updated result with given id from database.")
   @Returns(200, ResultModel)
   @Returns(404).Description("Not found")
+  @KeycloakAuth({anyRole: ["realm:admin", "realm:result-filler"]})
   async patchYouTubeLink(@BodyParams("id") id: string, @BodyParams("link") link: string) {
     return await this.resultService.patchYouTubeLink(id, link);
   }
@@ -65,6 +68,7 @@ export class ResultController {
   @Description("Returns deleted result with given id from database.")
   @Returns(200, ResultModel)
   @Returns(404).Description("Not found")
+  @KeycloakAuth({anyRole: ["realm:admin", "realm:result-filler"]})
   async deleteById(@PathParams("id") id: string) {
     return await this.resultService.deleteById(id);
   }

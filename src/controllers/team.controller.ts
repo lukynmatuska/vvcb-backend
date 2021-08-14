@@ -3,6 +3,7 @@ import { BodyParams, Controller, Delete, Get, PathParams, Post } from "@tsed/com
 import { ContentType, Description, Returns, Summary } from "@tsed/schema";
 import { TeamModel } from "src/models/team.model";
 import { TeamService } from "src/services/team.service";
+import { KeycloakAuth } from "src/decorators/KeycloakAuthOptions.decorator";
 
 @Controller('/team')
 export class TeamController {
@@ -13,6 +14,7 @@ export class TeamController {
   @Summary('Create new team')
   @Description('Return an inserted team from database.')
   @Returns(200, TeamModel)
+  @KeycloakAuth({anyRole: ["realm:admin", "realm:result-filler"]})
   async postRoot(@BodyParams() team: TeamModel) {
     return await this.teamService.save(team);
   }
@@ -42,6 +44,7 @@ export class TeamController {
   @Description("Returns deleted team with given id from database.")
   @Returns(200, TeamModel)
   @Returns(404).Description("Not found")
+  @KeycloakAuth({anyRole: ["realm:admin", "realm:result-filler"]})
   async deleteById(@PathParams("id") id: string) {
     return await this.teamService.deleteById(id);
   }
