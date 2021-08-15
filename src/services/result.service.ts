@@ -1,6 +1,7 @@
 import { Inject, Injectable } from "@tsed/di";
 import { MongooseModel } from "@tsed/mongoose";
 import { ResultModel } from "src/models/result.model";
+import { Time } from "src/models/time.class";
 import { WebSocketService } from "./web-socket.service";
 
 @Injectable()
@@ -65,5 +66,37 @@ export class ResultService {
             .populate("team")
             .populate("race")
             .exec()
+    }
+
+    async update(id: string, result: {time?: Time, team?: string, race?: string, media?: {youtube: string}}){
+        let obj = await this.model
+            .findById(id)
+            .exec();
+        
+        if(obj){
+            if(result.time){
+                obj.time = result.time;
+            }
+    
+            if(result.team){
+                obj.team = result.team;
+            }
+
+            if(result.race){
+                obj.race = result.race;
+            }
+
+            if(result.media){
+                obj.media = result.media;
+            }
+            obj.save();
+            let res = await obj
+                .populate("team")
+                .populate("race")
+                .execPopulate();
+            this.webSocketService.broadcast("update-result", res);
+            return res;
+        }
+        return null;
     }
 }
