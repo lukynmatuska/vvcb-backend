@@ -13,7 +13,6 @@ export class TeamModel {
 
   @Property()
   @Required()
-  @Unique()
   name: string;
 
   @Property()
