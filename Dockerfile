@@ -30,7 +30,8 @@ RUN npm install -g npm
 # RUN npm install typescript
 #tsconfig-paths
 RUN npm install
-RUN npm run build
+#RUN npm run build
+
 
 EXPOSE 8081
 ENV PORT 8081
@@ -38,4 +39,4 @@ ENV NODE_ENV production
 
 # CMD ["npm", "run start:prod"]
 
-CMD npm run start:prod
+CMD npm run start
