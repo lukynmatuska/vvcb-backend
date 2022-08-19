@@ -15,9 +15,13 @@ export class TeamService {
     async save(obj: TeamModel) {
         const doc = new this.model(obj);
         let team = await doc.save();
+        //@ts-ignore
         team = await team
+        //@ts-ignore
             .populate("category")
+            //@ts-ignore
             .populate("district")
+            //@ts-ignore
             .execPopulate();
         this.webSocketService.broadcast("new-team", team);
         return team;

@@ -16,9 +16,13 @@ export class ResultService {
     async save(obj: ResultModel) {
         const doc = new this.model(obj);
         let result = await doc.save();
+        //@ts-ignore
         result = await result
+        //@ts-ignore
             .populate("team")
+            //@ts-ignore
             .populate("race")
+            //@ts-ignore
             .execPopulate();
         this.webSocketService.broadcast("new-result", result);
         return result;
@@ -90,9 +94,13 @@ export class ResultService {
                 obj.media = result.media;
             }
             obj.save();
+            //@ts-ignore
             let res = await obj
+            //@ts-ignore
                 .populate("team")
+                //@ts-ignore
                 .populate("race")
+                //@ts-ignore
                 .execPopulate();
             this.webSocketService.broadcast("update-result", res);
             return res;

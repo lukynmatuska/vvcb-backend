@@ -16,11 +16,17 @@ export class RaceService {
     async save(obj: RaceModel) {
         const doc = new this.model(obj);
         let race = await doc.save();
+        //@ts-ignore
         race = await race
+        //@ts-ignore
             .populate("season")
+            //@ts-ignore
             .populate("categories.category")
+            //@ts-ignore
             .populate("categories.rules")
+            //@ts-ignore
             .populate("reservations.team")
+            //@ts-ignore
             .execPopulate();
         this.webSocketService.broadcast("new-race", race);
         return race;
