@@ -39,9 +39,9 @@ import compression from "compression";
               type: "oauth2",
               flows: {
                 authorizationCode: {
-                  authorizationUrl: process.env.SWAGGER_KEYCLOAK_AUTH_URL || "https://auth.vvcb.cz/auth/realms/vvcb/protocol/openid-connect/auth",
-                  tokenUrl: process.env.SWAGGER_KEYCLOAK_TOKEN_URL || "https://auth.vvcb.cz/auth/realms/vvcb/protocol/openid-connect/token",
-                  refreshUrl: process.env.SWAGGER_KEYCLOAK_TOKEN_URL || "https://auth.vvcb.cz/auth/realms/vvcb/protocol/openid-connect/token",
+                  authorizationUrl: process.env.SWAGGER_KEYCLOAK_AUTH_URL || "https://auth.vvcb.cz/realms/vvcb/protocol/openid-connect/auth",
+                  tokenUrl: process.env.SWAGGER_KEYCLOAK_TOKEN_URL || "https://auth.vvcb.cz/realms/vvcb/protocol/openid-connect/token",
+                  refreshUrl: process.env.SWAGGER_KEYCLOAK_TOKEN_URL || "https://auth.vvcb.cz/realms/vvcb/protocol/openid-connect/token",
                   scopes: { openid: "openid", profile: "profile" }
                 }
               }
