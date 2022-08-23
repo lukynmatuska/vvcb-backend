@@ -11,22 +11,25 @@ services:
       - ./data/mongo:/data/db
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
   server:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-      args:
-        - http_proxy
-        - https_proxy
-        - no_proxy
-    image: vvcb-backend/server:latest
+    image: ghcr.io/hodyrc/pohles-backend:latest
+    # build:
+    #   context: .
+    #   dockerfile: ./Dockerfile
+    #   args:
+    #     - http_proxy
+    #     - https_proxy
+    #     - no_proxy
     restart: always
     depends_on:
       - mongo
     ports:
-      - "8081:8081"
+      - "8082:8082"
     links:
       - mongo
     environment:
       - MONGO_URL=mongodb://vvcbuser:examplepass@mongo:27017/vvcb
+      - KEYCLOAK_URL=
+      - SWAGGER_KEYCLOAK_AUTH_URL=
+      - SWAGGER_KEYCLOAK_TOKEN_URL=
     stdin_open: true  # -i
     tty: true         # -t
