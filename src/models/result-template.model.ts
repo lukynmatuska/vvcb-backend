@@ -6,7 +6,6 @@ import { TimeTemplate } from "./time.class";
   name: "resultTemplates"
 })
 export class ResultTemplateModel {
-  @ReadOnly()
   @ObjectID("id")
   _id: string;
 

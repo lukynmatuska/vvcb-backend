@@ -1,11 +1,10 @@
 import { Model, ObjectID, Unique } from "@tsed/mongoose";
-import { Default, Enum, Property, ReadOnly, Required } from "@tsed/schema";
+import { Default, Enum, Name, Property, ReadOnly, Required } from "@tsed/schema";
 
 @Model({
   name: "seasons"
 })
 export class SeasonModel {
-  @ReadOnly()
   @ObjectID("id")
   _id: string;
 
