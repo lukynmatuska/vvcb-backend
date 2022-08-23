@@ -11,7 +11,7 @@ services:
       - ./data/mongo:/data/db
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
   server:
-    image: ghcr.io/hodyrc/pohles-backend:latest
+    image: ghcr.io/hodyrc/vvcb-backend:latest
     # build:
     #   context: .
     #   dockerfile: ./Dockerfile
