@@ -1,5 +1,5 @@
-import { Unique, Model, ObjectID, Ref } from "@tsed/mongoose";
-import { Property, ReadOnly, Required } from "@tsed/schema";
+import { Model, ObjectID, Ref } from "@tsed/mongoose";
+import { Property, Required } from "@tsed/schema";
 import { CategoryModel } from "./category.model";
 import { DistrictModel } from "./district.model";
 
@@ -7,7 +7,6 @@ import { DistrictModel } from "./district.model";
   name: 'teams'
 })
 export class TeamModel {
-  @ReadOnly()
   @ObjectID('id')
   _id: string;
 

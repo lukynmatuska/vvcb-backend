@@ -1,5 +1,5 @@
 import { Model, ObjectID, Ref } from "@tsed/mongoose";
-import { Default, Format, Property, ReadOnly, Required } from "@tsed/schema";
+import { Default, Format, Property, Required } from "@tsed/schema";
 import { RaceModel } from "./race.model";
 import { TeamModel } from "./team.model";
 import { Time } from "./time.class";
@@ -8,7 +8,6 @@ import { Time } from "./time.class";
   name: "results"
 })
 export class ResultModel {
-  @ReadOnly()
   @ObjectID("id")
   _id: string;
 

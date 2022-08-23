@@ -39,9 +39,9 @@ import compression from "compression";
               type: "oauth2",
               flows: {
                 authorizationCode: {
-                  authorizationUrl: process.env.SWAGGER_KEYCLOAK_AUTH_URL || "https://auth.vvcb.cz/realms/vvcb/protocol/openid-connect/auth",
-                  tokenUrl: process.env.SWAGGER_KEYCLOAK_TOKEN_URL || "https://auth.vvcb.cz/realms/vvcb/protocol/openid-connect/token",
-                  refreshUrl: process.env.SWAGGER_KEYCLOAK_TOKEN_URL || "https://auth.vvcb.cz/realms/vvcb/protocol/openid-connect/token",
+                  authorizationUrl: process.env.SWAGGER_KEYCLOAK_AUTH_URL || "https://auth.lukasmatuska.cz/realms/vvcb/protocol/openid-connect/auth",
+                  tokenUrl: process.env.SWAGGER_KEYCLOAK_TOKEN_URL || "https://auth.lukasmatuska.cz/realms/vvcb/protocol/openid-connect/token",
+                  refreshUrl: process.env.SWAGGER_KEYCLOAK_TOKEN_URL || "https://auth.lukasmatuska.cz/realms/vvcb/protocol/openid-connect/token",
                   scopes: { openid: "openid", profile: "profile" }
                 }
               }
@@ -73,7 +73,7 @@ import compression from "compression";
     keycloak: {
     realm: process.env.KEYCLOAK_REALM || "vvcb",
     bearerOnly: process.env.KEYCLOAK_BEARER_ONLY || true,
-    authServerUrl: process.env.KEYCLOAK_URL || "https://auth.vvcb.cz/",
+    authServerUrl: process.env.KEYCLOAK_URL || "https://auth.lukasmatuska.cz/",
     sslRequired: process.env.KEYCLOAK_SSL_REQUIRED || "external",
     resource: process.env.KEYCLOAK_CLIENT_ID || "backend",
     confidentialPort: process.env.KEYCLOAK_CONF_PORT || 0
