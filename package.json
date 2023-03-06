@@ -37,7 +37,7 @@
     "keycloak-connect": "^20.0.3",
     "method-override": "^3.0.0",
     "moment": "^2.29.4",
-    "mongoose": "^6.9.1",
+    "mongoose": "^6.10.1",
     "socket.io": "^4.6.0",
     "ts-node": "^10.9.1"
   },
